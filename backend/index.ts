@@ -1,4 +1,5 @@
 import express, { Express, Request, Response } from 'express';
+import mongoose, { ConnectOptions } from 'mongoose';
 
 const port = 8000;
 
@@ -8,6 +9,7 @@ app.get("/",  (req: Request, res: Response) => {
     res.send("Hello from express + typescript");
 });
 
-app.listen(port, () => {
-    console.log(`now listening on port ${port}`);
-})
+// mongodb connection
+mongoose.connect('mongodb://0.0.0.0:27017/test-todo')
+.then(result => app.listen(port, () => console.log(`connected to database and app running on port ${port}`)))
+.catch(err => console.log(err))

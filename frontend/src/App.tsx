@@ -5,13 +5,35 @@ import '@fontsource/roboto/700.css';
 import './App.css';
 import { Typography } from '@mui/material';
 
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Header from './components/Header';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: '#43616b',
+      main: '#143a47',
+      dark: '#0e2831',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#f7f7f7',
+      main: '#f6f6f6',
+      dark: '#acacac',
+      contrastText: '#000',
+    },
+  },
+});
+
 function App() {
   return (
-    <div className="App">
-    <Typography  sx={{ fontFamily: 'Roboto' }}>
-      <h1>Sample Test</h1>
-    </Typography>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <Typography  sx={{ fontFamily: 'Roboto' }} component="div">
+        </Typography>
+        <Header/>
+      </div>
+    </ThemeProvider>
   );
 }
 

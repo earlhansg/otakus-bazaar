@@ -3,7 +3,8 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
+
+const pages = ['Limited', 'Accesories', 'Shop All'];
 
 export default function Header() {
   return (
@@ -13,20 +14,14 @@ export default function Header() {
             <Typography variant="h6" component="a" sx={{ width: '30%', display:'flex', justifyContent: "flex-start"}}>
                 Otaku
             </Typography>
-            <Box sx={{ display:'flex', width: '28%', justifyContent:'space-between', marginRight: 'auto' }}>
-                <Typography variant="h6" component="a">
-                    Limited
-                </Typography>
-                <Typography variant="h6" component="a">
-                    Accessories
-                </Typography>
-                <Typography variant="h6" component="a" sx={{  }}>
-                    Shop All
-                </Typography>
+            <Box sx={{ display:'flex', width:'28%', justifyContent:'space-between', marginRight: 'auto' }}>
+                {
+                    pages.map((page) => (
+                        <Typography key={page} component="a" sx={{ fontSize:'16px', fontWeight: 500, lineHeight: '2.1' }}>{page}</Typography>
+                    ))
+                }
             </Box>
-            <Typography variant="h6" component="a">
-                Icon
-            </Typography>
+            <Button>Login</Button>
         </Toolbar>
       </AppBar>
     </Box>

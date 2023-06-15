@@ -6,6 +6,8 @@ import './App.css';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from './components/Header';
 import SubHeader from './components/SubHeader';
+import ItemLIst from './components/ItemLIst';
+import { Box } from '@mui/material';
 
 const theme = createTheme({
   palette: {
@@ -27,12 +29,13 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
+      <Box className="App" sx={{ fontFamily: 'Roboto' }}>
         {/* <Typography  sx={{ fontFamily: 'Roboto' }} component="div">
         </Typography> */}
         <Header/>
         <SubHeader/>
-      </div>
+        <ItemLIst/>
+      </Box>
     </ThemeProvider>
   );
 }

@@ -12,7 +12,7 @@ export default function SubHeader() {
             </Typography>
         </Grid>
         <Grid item xs={12} sx={{display:'flex', justifyContent:'center'}}>
-            <Typography variant="subtitle1" sx={{display:'flex', maxWidth:'40%', letterSpacing:'1px'}} gutterBottom>
+            <Typography variant="subtitle1" sx={{display:'flex', maxWidth:{md:'40%', xs:'100%'}, letterSpacing:'1px'}} gutterBottom>
                 You want options? We’ve got options. From the luxe Ratio Eight and its conical physique to the no-nonsense Six, there’s a Ratio that matches your taste and temperament. Slow drinker? Add a thermal carafe. You want the form of the Six with the carafe of the Eight? Do it. Here’s everything you could ever want. 
             </Typography>
         </Grid>

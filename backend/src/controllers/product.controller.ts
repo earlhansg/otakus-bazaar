@@ -4,7 +4,9 @@ import path from 'path';
 import fs from 'fs-extra';
 
 export async function getProducts(req: Request, res: Response): Promise<Response> {
-    return res.json("successfully get request");
+    // return res.json("successfully get request");
+    const products = await Product.find().lean();
+    return res.json(products);
 };
 
 export async function createPhoto(req: Request, res: Response): Promise<Response> {

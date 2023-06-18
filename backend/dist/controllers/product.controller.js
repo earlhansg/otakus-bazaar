@@ -13,7 +13,9 @@ exports.createPhoto = exports.getProducts = void 0;
 const product_1 = require("../models/product");
 function getProducts(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        return res.json("successfully get request");
+        // return res.json("successfully get request");
+        const products = yield product_1.Product.find().lean();
+        return res.json(products);
     });
 }
 exports.getProducts = getProducts;

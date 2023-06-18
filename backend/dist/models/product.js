@@ -11,7 +11,7 @@ const ProductSchema = new mongoose_1.Schema({
         type: Number,
     },
     reviews: {
-        type: String,
+        type: Array,
     },
     price: {
         type: Number,

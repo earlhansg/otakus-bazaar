@@ -59,23 +59,23 @@ export default function ItemLIst() {
                       <Fab
                         color="primary"
                         aria-label="add"
-                        sx={{ position: "absolute", right: "0", top: "-20px" }}
+                        sx={{ position: "absolute", right: "12px", top: "-20px" }}
                       >
                         View
                       </Fab>
                     </Fade>
                   ) : null}
-                  <Stack direction="row" spacing={2} sx={{ width: "100%" }}>
+                  <Stack direction="row" spacing={2} sx={{width: "100%", justifyContent: 'center'}}>
                     <img
                       src={findProductImage(item.imagePath)}
                       alt={item.name}
-                      width="100%"
+                      width="90%"
                       height="260px"
                     />
                   </Stack>
                   <Typography
                     mt={1}
-                    sx={{ fontSize: 19, fontWeight: 500 }}
+                    sx={{ fontSize: 17, fontWeight: 500 }}
                     color="text.secondary"
                     gutterBottom
                   >

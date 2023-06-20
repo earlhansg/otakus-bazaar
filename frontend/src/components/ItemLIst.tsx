@@ -8,6 +8,7 @@ import Stack from "@mui/material/Stack";
 import Fab from "@mui/material/Fab";
 import Fade from "@mui/material/Fade";
 import { useProductsQuery } from "../store/services/productsApi";
+import ItemModal from "./ItemModal";
 
 
 type Item = {
@@ -43,6 +44,7 @@ export default function ItemLIst() {
         marginRight: { lg: "15rem", xs: "0" },
       }}
     >
+      <ItemModal/>
       <Grid container spacing={2}>
         {isSuccess &&
           data.map((item) => (

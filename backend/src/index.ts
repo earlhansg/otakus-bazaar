@@ -2,11 +2,14 @@ import express, { Express, Request, Response } from "express";
 import { json } from "body-parser";
 import mongoose, { ConnectOptions } from "mongoose";
 import productRoutes from './routes/product';
+import cors from 'cors';
 
 const port = 8000;
 
 const app: Express = express();
 app.use(json());
+app.use(cors());
+
 
 // Routes
 app.use('/api/', productRoutes);

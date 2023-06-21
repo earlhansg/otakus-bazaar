@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -8,7 +8,9 @@ import Stack from "@mui/material/Stack";
 import Fab from "@mui/material/Fab";
 import Fade from "@mui/material/Fade";
 import { useProductsQuery } from "../store/services/productsApi";
-import ItemModal from "./ItemModal";
+import {ItemModal, MyModalHandles} from "./ItemModal";
+import { Product } from "../store/models/product.model";
+
 
 
 type Item = {
@@ -16,24 +18,31 @@ type Item = {
   focus: boolean;
 };
 
+const findProductImage = (path: string) => {
+  const result = path.slice(8);
+  return require(`../images/${result}`);
+}
+
 export default function ItemLIst() {
   const {data, isSuccess} = useProductsQuery();
   const [isHovering, setIsHovering] = useState<Item | null>(null);
+  const [product, setProduct] = useState<Product | null>(null)
+  const buttonRef = useRef<MyModalHandles | null>(null);
 
   const handleMouseOver = (id: string) => {
-    console.log("handleMouseOver", id);
+    // console.log("handleMouseOver", id);
     const focus = true;
     setIsHovering({ id, focus });
   };
 
   const handleMouseOut = (id: string) => {
-    console.log("handleMouseOut", id);
+    // console.log("handleMouseOut", id);
     setIsHovering(null);
   };
 
-  const findProductImage = (path: string) => {
-    const result = path.slice(8);
-    return require(`../images/${result}`);
+  const clickViewProduct = (product: Product) => {
+    setProduct(product);
+    buttonRef.current?.showModal();
   }
 
   return (
@@ -44,7 +53,7 @@ export default function ItemLIst() {
         marginRight: { lg: "15rem", xs: "0" },
       }}
     >
-      <ItemModal/>
+      <ItemModal item={product} ref={buttonRef}/>
       <Grid container spacing={2}>
         {isSuccess &&
           data.map((item) => (
@@ -54,6 +63,7 @@ export default function ItemLIst() {
                 sx={{ position: "relative", width: { md: "100%", xs: "80%" } }}
                 onMouseOver={() => handleMouseOver(item._id)}
                 onMouseOut={() => handleMouseOut(item._id)}
+                onClick={() => clickViewProduct(item)}
               >
                 <Box>
                   {isHovering?.id === item._id ? (

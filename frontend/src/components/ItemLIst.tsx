@@ -10,6 +10,7 @@ import Fade from "@mui/material/Fade";
 import { useProductsQuery } from "../store/services/productsApi";
 import {ItemModal, MyModalHandles} from "./ItemModal";
 import { Product } from "../store/models/product.model";
+import { findProductImage } from "./utils/findProductImage";
 
 
 
@@ -18,39 +19,32 @@ type Item = {
   focus: boolean;
 };
 
-const findProductImage = (path: string) => {
-  const result = path.slice(8);
-  return require(`../images/${result}`);
-}
-
 export default function ItemLIst() {
   const {data, isSuccess} = useProductsQuery();
   const [isHovering, setIsHovering] = useState<Item | null>(null);
-  const [product, setProduct] = useState<Product | null>(null)
-  const buttonRef = useRef<MyModalHandles | null>(null);
+  const [product, setProduct] = useState({} as Product);
+  const buttonRef = useRef({} as MyModalHandles)
 
   const handleMouseOver = (id: string) => {
-    // console.log("handleMouseOver", id);
     const focus = true;
     setIsHovering({ id, focus });
   };
 
   const handleMouseOut = (id: string) => {
-    // console.log("handleMouseOut", id);
     setIsHovering(null);
   };
 
   const clickViewProduct = (product: Product) => {
     setProduct(product);
-    buttonRef.current?.showModal();
+    buttonRef.current.showModal();
   }
 
   return (
     <Box
-      mt="3"
       sx={{
+        marginTop: { md: "13rem" },
         marginLeft: { lg: "15rem", xs: "0" },
-        marginRight: { lg: "15rem", xs: "0" },
+        marginRight: { lg: "15rem", xs: "0" }
       }}
     >
       <ItemModal item={product} ref={buttonRef}/>

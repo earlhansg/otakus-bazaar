@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 
 export default function SubHeader() {
   return (
-    <Box sx={{ flexGrow: 1, margin: '2rem', color: '#2c2e2f' }}>
+    <Box sx={{ flexGrow: 1, margin: '7rem 2rem', color: '#2c2e2f' }}>
       <Grid container spacing={4}>
         <Grid item xs={12}>
             <Typography variant="h4" sx={{fontWeight:'500', letterSpacing:'1px'}} gutterBottom>

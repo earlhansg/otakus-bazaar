@@ -8,6 +8,7 @@ import Header from './components/Header';
 import SubHeader from './components/SubHeader';
 import ItemLIst from './components/ItemLIst';
 import { Box } from '@mui/material';
+import Cart from './components/Cart';
 
 const theme = createTheme({
   palette: {
@@ -32,9 +33,10 @@ function App() {
       <Box className="App" sx={{ fontFamily: 'Roboto' }}>
         {/* <Typography  sx={{ fontFamily: 'Roboto' }} component="div">
         </Typography> */}
-        <Header/>
+        {/* <Header/>
         <SubHeader/>
-        <ItemLIst/>
+        <ItemLIst/> */}
+        <Cart/>
       </Box>
     </ThemeProvider>
   );

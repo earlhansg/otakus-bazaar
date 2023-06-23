@@ -1,4 +1,4 @@
-import { useState, forwardRef, useImperativeHandle } from "react";
+import { useState, forwardRef, useImperativeHandle, useEffect } from "react";
 import Modal from "@mui/material/Modal";
 import { Box, Button, Typography } from "@mui/material";
 import Divider from "@mui/material/Divider";
@@ -8,6 +8,9 @@ import FlagCircle from "@mui/icons-material/FlagCircle";
 import Science from "@mui/icons-material/Science";
 import { Product } from "../store/models/product.model";
 import { findProductImage } from "./utils/findProductImage";
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions } from "../store/slices/cart-slice";
+import { RootState } from "../store";
 
 const style = {
   position: "absolute" as "absolute",
@@ -35,12 +38,31 @@ export const ItemModal = forwardRef<MyModalHandles, ItemModalProps>(
   (props, ref) => {
     const [open, setOpen] = useState(false);
     const handleClose = () => setOpen(false);
+    const cartItems = useSelector((state: RootState) => state.cart.itemsList);
+
+    const dispatch = useDispatch();
+    const addToCart = () => {
+      dispatch(
+        cartActions.addToCart({
+          ...props.item
+        })
+      );
+    }
 
     useImperativeHandle(ref, () => ({
       showModal() {
         setOpen(true);
       },
     }));
+
+    useEffect(() => {
+      // This function will be executed after the component renders
+      console.log('Component rendered', cartItems);
+      return () => {
+        console.log('Component unmounted');
+        // Perform cleanup actions here
+      };
+    }, [cartItems]);
 
     return (
       <>
@@ -49,6 +71,7 @@ export const ItemModal = forwardRef<MyModalHandles, ItemModalProps>(
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
+          sx={{zIndex:1200}}
         >
           <Box sx={style}>
             <Box sx={{ width: { md: "45%" } }}>
@@ -119,7 +142,7 @@ export const ItemModal = forwardRef<MyModalHandles, ItemModalProps>(
                 </Typography>
               </Stack>
 
-              <Button variant="contained" sx={{ mt: 3 }}>
+              <Button variant="contained" sx={{ mt: 3 }} onClick={addToCart}>
                 Add to Cart
               </Button>
             </Box>

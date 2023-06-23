@@ -11,4 +11,6 @@ const rootReducer =  configureStore({
         getDefaultMiddleware().concat(productsApi.middleware),
 })
 
+export type RootState = ReturnType<typeof rootReducer.getState>
+
 export default rootReducer;

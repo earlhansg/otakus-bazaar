@@ -24,7 +24,10 @@ const theme = createTheme({
       dark: '#acacac',
       contrastText: '#000',
     },
-  },
+    action: {
+      disabled: '#143a47'
+    }
+  }
 });
 
 function App() {
@@ -33,9 +36,9 @@ function App() {
       <Box className="App" sx={{ fontFamily: 'Roboto' }}>
         {/* <Typography  sx={{ fontFamily: 'Roboto' }} component="div">
         </Typography> */}
-        {/* <Header/>
+        <Header/>
         <SubHeader/>
-        <ItemLIst/> */}
+        <ItemLIst/>
         <Cart/>
       </Box>
     </ThemeProvider>

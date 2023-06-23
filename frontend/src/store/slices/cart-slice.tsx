@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Product } from "../models/product.model";
+import { RemoveItem } from "../../components/Cart";
 
-interface CartItem extends Product {
+export interface CartItem extends Product {
   quantity: number;
   totalPrice: number;
 }
@@ -9,11 +10,13 @@ interface CartItem extends Product {
 type initialStateProp = {
   itemsList: CartItem[];
   totalQuantity: number;
+  showCart: boolean;
 };
 
 const initialState: initialStateProp = {
   itemsList: [],
   totalQuantity: 0,
+  showCart: false,
 };
 
 const cartSlice = createSlice({
@@ -21,6 +24,7 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart(state, action) {
+      state.showCart = true;
       const newItem: CartItem = action.payload;
       // to check if item is already available
       const existingItem = state.itemsList.find(
@@ -46,18 +50,26 @@ const cartSlice = createSlice({
       }
     },
     removeFromCart(state, action) {
-      const id = action.payload;
+      const { id, type } = action.payload;
 
-      const existingItem = state.itemsList.find((item) => item._id === id);
-      if (existingItem) {
-        if (existingItem?.quantity === 1) {
-          state.itemsList = state.itemsList.filter((item) => item._id !== id);
-          state.totalQuantity--;
-        } else {
-          existingItem.quantity--;
-          existingItem.totalPrice -= existingItem.price;
+      if (type === "remove") {
+        state.itemsList = state.itemsList.filter((item) => item._id !== id);
+        state.totalQuantity--;
+      } else {
+        const existingItem = state.itemsList.find((item) => item._id === id);
+        if (existingItem) {
+          if (existingItem.quantity === 1) {
+            state.itemsList = state.itemsList.filter((item) => item._id !== id);
+            state.totalQuantity--;
+          } else {
+            existingItem.quantity--;
+            existingItem.totalPrice -= existingItem.price;
+          }
         }
       }
+    },
+    hideCart(state, action) {
+      state.showCart = action.payload;
     },
   },
 });

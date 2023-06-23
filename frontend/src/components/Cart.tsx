@@ -7,6 +7,7 @@ import { ButtonGroup, IconButton, Stack, Typography } from "@mui/material";
 import Clear from "@mui/icons-material/Clear";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
+import image from '../images/07ca19a4-4ab6-45ea-8b6b-7b37d3c8e9e4.png'
 
 export default function Cart() {
   const [state, setState] = useState(true);
@@ -33,13 +34,22 @@ export default function Cart() {
           <Clear />
         </IconButton>
       </Stack>
-      <Stack direction="row" sx={{ borderTop: "1px solid #efecec" }}>
+      <Divider variant="inset" sx={{ marginLeft: "0px" }} />
+      <Stack direction="row" sx={{ borderBottom: "1px solid #efecec" }}>
         <Stack sx={{ width: "30%" }} m={2}>
-          image
+          <img
+            src={image}
+            alt="image"
+            width="100%"
+            height="100px"
+          />
         </Stack>
         <Stack sx={{ m: "1rem", width: "25%" }} m={2}>
           <Typography variant="h6" component="h6" sx={{ fontSize: "17px" }}>
             Ratio Eight
+          </Typography>
+          <Typography component="p" sx={{ fontSize: "14px", mb:2 }}>
+            White
           </Typography>
           <Stack sx={{ width: "30%" }}>
             <ButtonGroup variant="outlined" sx={{ height: "30px" }}>
@@ -70,8 +80,9 @@ export default function Cart() {
             $339.00
           </Typography>
         </Stack>
+        
+      {/* <Divider variant="inset" sx={{ marginLeft: "0px" }} /> */}
       </Stack>
-      <Divider variant="inset" sx={{ marginLeft: "0px" }} />
     </Box>
   );
 

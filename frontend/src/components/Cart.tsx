@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import { findProductImage } from "./utils/findProductImage";
 import { CartItem, cartActions } from "../store/slices/cart-slice";
+import CartFooter from "./CartFooter";
 
 export type RemoveItem = "decrement" | "remove";
 
@@ -53,7 +54,7 @@ export default function Cart() {
         </IconButton>
       </Stack>
       <Divider variant="inset" sx={{ marginLeft: "0px" }} />
-      <Stack>
+      <Stack sx={{height:"545px", overflowY:"scroll"}}>
         {cartItemList.map((item) => (
           <Stack
             key={item._id}
@@ -112,6 +113,7 @@ export default function Cart() {
           </Stack>
         ))}
       </Stack>
+      <CartFooter/>
     </Box>
   );
 

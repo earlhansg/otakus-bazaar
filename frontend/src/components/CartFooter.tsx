@@ -2,8 +2,13 @@ import React from 'react'
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import { ButtonGroup, IconButton, Stack, Typography, Button } from "@mui/material";
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 
 const CartFooter = () => {
+  let total = 0;
+  const cartItemList = useSelector((state: RootState) => state.cart.itemsList);
+  cartItemList.map(({totalPrice}) => total+=totalPrice);
   return (
     <Box sx={{backgroundColor:"#f7f3ee"}}>
         <Stack>
@@ -30,7 +35,7 @@ const CartFooter = () => {
                 Subtotal
               </Typography>
               <Typography component="h6" variant="h6" sx={{ margin:"1em 1.5em 0 1.5em", fontSize: "17px" }}>
-                $3,291.00
+                ${total.toLocaleString()}
               </Typography>
             </Stack>
             <Button variant="contained" sx={{ mt: 3, borderRadius:"0px", p: 2 }}>

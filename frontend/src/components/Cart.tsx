@@ -45,16 +45,21 @@ export default function Cart() {
 
   const orderList = () => (
     <Box sx={{ width: "440px" }}>
-      <Stack direction="row" sx={{ m: "1rem 2rem" }}>
-        <Typography variant="h5" component="h5" sx={{ flex: 1 }}>
+      <Stack direction="row" sx={{ m: "1.2rem 1.5rem" }}>
+        <Typography
+          color="primary"
+          variant="h5"
+          component="h5"
+          sx={{ flex: 1, letterSpacing: "1.1px", fontWeight: "500" }}
+        >
           Cart
         </Typography>
-        <IconButton onClick={toggleDrawer(false)}>
-          <Clear />
+        <IconButton size="small" onClick={toggleDrawer(false)}>
+          <Clear sx={{ width: "1.4rem", height: "1.2rem" }} />
         </IconButton>
       </Stack>
       <Divider variant="inset" sx={{ marginLeft: "0px" }} />
-      <Stack sx={{height:"545px", overflowY:"scroll"}}>
+      <Stack sx={{ height: "545px", overflowY: "scroll" }}>
         {cartItemList.map((item) => (
           <Stack
             key={item._id}
@@ -113,7 +118,7 @@ export default function Cart() {
           </Stack>
         ))}
       </Stack>
-      <CartFooter/>
+      <CartFooter />
     </Box>
   );
 

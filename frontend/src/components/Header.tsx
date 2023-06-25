@@ -6,11 +6,34 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { IconButton, MenuItem, Menu } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import Badge, { BadgeProps } from "@mui/material/Badge";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store";
+import { styled, useTheme } from "@mui/system";
+import { cartActions } from "../store/slices/cart-slice";
 
 const pages = ["Limited", "Accesories", "Shop All"];
 
+const StyledBadge = styled(Badge)<BadgeProps>(() => {
+  const muiTheme = useTheme();
+
+  return {
+    "& .MuiBadge-badge": {
+      right: -3,
+      top: 13,
+      border: `2px solid ${muiTheme.palette.background.paper}`,
+      padding: "0 4px",
+    },
+  };
+});
+
 export default function Header() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const totalQuantity = useSelector(
+    (state: RootState) => state.cart.totalQuantity
+  );
+  const dispatch = useDispatch();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -95,6 +118,15 @@ export default function Header() {
             ))}
           </Box>
           <Button>Login</Button>
+
+          <IconButton
+            aria-label="cart"
+            onClick={() => dispatch(cartActions.hideCart(true))}
+          >
+            <StyledBadge badgeContent={totalQuantity} color="primary">
+              <ShoppingCartIcon />
+            </StyledBadge>
+          </IconButton>
         </Toolbar>
       </AppBar>
     </Box>

@@ -69,7 +69,7 @@ export default function Cart() {
             <Stack sx={{ width: "30%" }} m={2}>
               <img
                 src={findProductImage(item.imagePath)}
-                alt="image"
+                alt={item.name}
                 width="100%"
                 height="100px"
               />

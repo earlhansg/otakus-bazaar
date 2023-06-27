@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Product } from "../models/product.model";
-import { RemoveItem } from "../../components/Cart";
 
 export interface CartItem extends Product {
   quantity: number;

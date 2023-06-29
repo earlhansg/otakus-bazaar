@@ -6,25 +6,14 @@ import {
   FormControlLabel,
   InputLabel,
   MenuItem,
-  Radio,
-  RadioGroup,
   Select
 } from "@mui/material";
 import { Stack, Typography, Button } from "@mui/material";
 import Paypal from "../images/checkout/paypal.png";
 import Mastercard from "../images/checkout/mastercard.png";
 import Btc from "../images/checkout/btc.png";
-import LocalShippingOutlined from "@mui/icons-material/LocalShippingOutlined";
 import InputContainer from "./InputContainer";
-
-const DeliveryMethod = () => {
-  return (
-    <Stack flexDirection={"row"} justifyContent={"center"}>
-      <LocalShippingOutlined />
-      <Typography ml={1}>Pickup</Typography>
-    </Stack>
-  );
-};
+import RadioInput from "./RadioInput";
 
 const Checkout = () => {
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
@@ -94,37 +83,7 @@ const Checkout = () => {
             <Typography component="h4" mb={1}>
               Delivery method
             </Typography>
-            <RadioGroup
-              aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue="ship"
-              name="radio-buttons-group"
-            >
-              <FormControlLabel
-                sx={{
-                  border: "1px solid #bfbfbf",
-                  marginLeft: "1px",
-                  width: "97%",
-                  padding: "5px",
-                  borderRadius: " 8px 8px 0px 0px",
-                }}
-                value="ship"
-                control={<Radio />}
-                label={<DeliveryMethod />}
-              />
-              <FormControlLabel
-                sx={{
-                  border: "1px solid #bfbfbf",
-                  marginLeft: "1px",
-                  width: "97%",
-                  padding: "5px",
-                  borderRadius: " 0px 0px 8px 8px",
-                  borderTop: "none",
-                }}
-                value="pickup"
-                control={<Radio />}
-                label={<DeliveryMethod />}
-              />
-            </RadioGroup>
+            <RadioInput/>
           </Stack>
 
           <Stack mt={2} mb={1}>

@@ -8,14 +8,14 @@ import {
   MenuItem,
   Radio,
   RadioGroup,
-  Select,
-  TextField,
+  Select
 } from "@mui/material";
 import { Stack, Typography, Button } from "@mui/material";
 import Paypal from "../images/checkout/paypal.png";
 import Mastercard from "../images/checkout/mastercard.png";
 import Btc from "../images/checkout/btc.png";
 import LocalShippingOutlined from "@mui/icons-material/LocalShippingOutlined";
+import InputContainer from "./InputContainer";
 
 const DeliveryMethod = () => {
   return (
@@ -25,7 +25,6 @@ const DeliveryMethod = () => {
     </Stack>
   );
 };
-
 
 const Checkout = () => {
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
@@ -70,9 +69,21 @@ const Checkout = () => {
                 </Typography>
               </Stack>
             </Stack>
-            <TextField id="outlined-basic" label="Email" variant="outlined"/>
+
+            <InputContainer
+              type="textfield"
+              multiple={false}
+              values={{
+                iName: "name",
+                iLabel: "name",
+                iId: "name",
+                id: "outlined-basic",
+                label: "Email",
+                variant: "outlined",
+              }}
+            />
           </Stack>
-          
+
           <Stack ml={0}>
             <FormControlLabel
               control={<Checkbox />}
@@ -115,6 +126,7 @@ const Checkout = () => {
               />
             </RadioGroup>
           </Stack>
+
           <Stack mt={2} mb={1}>
             <Typography sx={{}} component="h4">
               Shopping Address
@@ -134,72 +146,157 @@ const Checkout = () => {
               </Select>
             </FormControl>
           </Stack>
-          <Stack mt={1} mb={1} flexDirection={"row"} justifyContent={"space-between"}>
-            <TextField
-              id="outlined-basic"
-              label="Firstname"
-              variant="outlined"
-              sx={{ width: "49%" }}
+
+          <Stack
+            mt={1}
+            mb={1}
+            flexDirection={"row"}
+            justifyContent={"space-between"}
+          >
+            <InputContainer
+              type="textfield"
+              multiple={true}
+              values={{
+                iName: "firstname",
+                iLabel: "firstname",
+                iId: "firstname",
+                id: "outlined-basic",
+                label: "Firstname",
+                variant: "outlined",
+                sx: { width: "49%" },
+              }}
             />
-            <TextField
-              id="outlined-basic"
-              label="Firstname"
-              variant="outlined"
-              sx={{ width: "49%" }}
+            <InputContainer
+              type="textfield"
+              multiple={true}
+              values={{
+                iName: "lastname",
+                iLabel: "lastname",
+                iId: "lastname",
+                id: "outlined-basic",
+                label: "Lastname",
+                variant: "outlined",
+                sx: { width: "49%" },
+              }}
             />
-          </Stack>
-          <Stack mt={1} mb={1}>
-            <TextField
-              id="outlined-basic"
-              label="Company (optional)"
-              variant="outlined"
-            />
-          </Stack>
-          <Stack mt={1} mb={1}>
-            <TextField id="outlined-basic" label="Address" variant="outlined" />
-          </Stack>
-          <Stack>
-            <TextField
-              id="outlined-basic"
-              label="Apartment, suite, etc. (optional)"
-              variant="outlined"
-            />
-          </Stack>
-          <Stack mt={1} mb={1} flexDirection={"row"} justifyContent={"space-between"}>
-            <TextField
-              id="outlined-basic"
-              label="City"
-              variant="outlined"
-              sx={{ width: "32%" }}
-            />
-            <TextField
-              id="outlined-basic"
-              label="State"
-              variant="outlined"
-              sx={{ width: "32%" }}
-            />
-            <TextField
-              id="outlined-basic"
-              label="ZIP code"
-              variant="outlined"
-              sx={{ width: "32%" }}
-            />
-          </Stack>
-          <Stack mt={1} mb={1}>
-            <TextField id="outlined-basic" label="Phone" variant="outlined" />
           </Stack>
 
+          <InputContainer
+            mt={1}
+            mb={1}
+            type="textfield"
+            multiple={false}
+            values={{
+              iName: "company",
+              iLabel: "company",
+              iId: "company",
+              id: "outlined-basic",
+              label: "Company (optional)",
+              variant: "outlined",
+            }}
+          />
+
+          <InputContainer
+            mt={1}
+            mb={1}
+            type="textfield"
+            multiple={false}
+            values={{
+              iName: "address",
+              iLabel: "address",
+              iId: "address",
+              id: "outlined-basic",
+              label: "Address",
+              variant: "outlined",
+            }}
+          />
+
+          <InputContainer
+            mt={1}
+            mb={1}
+            type="textfield"
+            multiple={false}
+            values={{
+              iName: "apartment",
+              iLabel: "apartment",
+              iId: "apartment",
+              id: "outlined-basic",
+              label: "Apartment, suite, etc. (optional)",
+              variant: "outlined",
+            }}
+          />
+
+          <Stack
+            mt={1}
+            mb={1}
+            flexDirection={"row"}
+            justifyContent={"space-between"}
+          >
+            <InputContainer
+              type="textfield"
+              multiple={true}
+              values={{
+                iName: "city",
+                iLabel: "city",
+                iId: "city",
+                id: "outlined-basic",
+                label: "City",
+                variant: "outlined",
+                sx: { width: "32%" },
+              }}
+            />
+            <InputContainer
+              type="textfield"
+              multiple={true}
+              values={{
+                iName: "state",
+                iLabel: "state",
+                iId: "state",
+                id: "outlined-basic",
+                label: "State",
+                variant: "outlined",
+                sx: { width: "32%" },
+              }}
+            />
+            <InputContainer
+              type="textfield"
+              multiple={true}
+              values={{
+                iName: "zipcode",
+                iLabel: "zipcode",
+                iId: "zipcode",
+                id: "outlined-basic",
+                label: "Zip Code",
+                variant: "outlined",
+                sx: { width: "32%" },
+              }}
+            />
+          </Stack>
+          <InputContainer
+            mt={1}
+            mb={1}
+            type="textfield"
+            multiple={true}
+            values={{
+              iName: "phone",
+              iLabel: "phone",
+              iId: "phone",
+              id: "outlined-basic",
+              label: "Phone",
+              variant: "outlined",
+            }}
+          />
           <Button variant="contained" sx={{ mt: 3, borderRadius: "0px", p: 2 }}>
             Checkout
           </Button>
         </Stack>
-        <Stack>
+        {/* <Stack>
           <Typography sx={{}} component="h4">
             Otaku
           </Typography>
-        </Stack>
+        </Stack> */}
       </Box>
-      <Box sx={{ width: "50%", backgroundColor: "#F7F3EE", height: "100vh" }}>
+      <Box sx={{ width: "50%", backgroundColor: "#F7F3EE"}}>
         UserDetails
       </Box>
     </Box>

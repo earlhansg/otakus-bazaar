@@ -6,17 +6,25 @@ import {
   FormControlLabel,
   InputLabel,
   MenuItem,
-  Select
+  Select,
 } from "@mui/material";
 import { Stack, Typography, Button } from "@mui/material";
 import Paypal from "../images/checkout/paypal.png";
 import Mastercard from "../images/checkout/mastercard.png";
 import Btc from "../images/checkout/btc.png";
 import InputContainer from "./InputContainer";
-import RadioInput from "./RadioInput";
+import DeliveryType from "./DeliveryType";
+import { Divider } from "@mui/material";
+
+const countries = [
+  {
+    id: 1,
+    name: "Philippines",
+  },
+];
 
 const Checkout = () => {
-  const label = { inputProps: { "aria-label": "Checkbox demo" } };
+  // const label = { inputProps: { "aria-label": "Checkbox demo" } };
   return (
     <Box sx={{ display: "flex" }}>
       <Box
@@ -25,7 +33,12 @@ const Checkout = () => {
       >
         <Stack m={2} sx={{ width: "60%" }}>
           <Typography
-            sx={{ display: "flex", justifyContent: "center" }}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              fontSize: "16px",
+              color: (theme) => theme.palette.secondary.light,
+            }}
             component="h4"
           >
             Express Checkout
@@ -41,19 +54,40 @@ const Checkout = () => {
               <Avatar alt="Bitcoin" src={Btc} sx={{ width: 50 }} />
             </Button>
           </Stack>
+          <Divider
+            flexItem
+            sx={{
+              mt: 1,
+              mb: 2,
+              color: (theme) => theme.palette.secondary.light,
+              fontSize: "14px",
+              fontFamily: "Roboto",
+            }}
+          >
+            OR
+          </Divider>
           <Stack mt={2}>
             <Stack flexDirection={"row"}>
               <Typography
-                sx={{ display: "flex", justifyContent: "left", flexGrow: 1 }}
+                sx={{
+                  display: "flex",
+                  justifyContent: "left",
+                  flexGrow: 1,
+                  mb: 1,
+                  fontSize: "16px",
+                }}
                 component="h4"
               >
                 Contact
               </Typography>
               <Stack flexDirection={"row"}>
-                <Typography sx={{ mr: 1 }} component="h4">
+                <Typography sx={{ mr: 1, fontSize: "14px" }} component="h4">
                   Already have an account?
                 </Typography>
-                <Typography sx={{}} component="h4">
+                <Typography
+                  sx={{ fontSize: "14px", textDecoration: "underline" }}
+                  component="h4"
+                >
                   Log in
                 </Typography>
               </Stack>
@@ -76,18 +110,23 @@ const Checkout = () => {
           <Stack ml={0}>
             <FormControlLabel
               control={<Checkbox />}
-              label="Email me with news and offers"
+              label={
+                <Typography sx={{ fontSize: "14px" }}>
+                  Email me with news and offers
+                </Typography>
+              }
             />
           </Stack>
+
           <Stack mt={2}>
-            <Typography component="h4" mb={1}>
+            <Typography component="h4" mb={1} sx={{ fontSize: "16px" }}>
               Delivery method
             </Typography>
-            <RadioInput/>
+            <DeliveryType />
           </Stack>
 
           <Stack mt={2} mb={1}>
-            <Typography sx={{}} component="h4">
+            <Typography sx={{ fontSize: "16px", mb: 2 }} component="h4">
               Shopping Address
             </Typography>
             <FormControl fullWidth>
@@ -97,11 +136,11 @@ const Checkout = () => {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                label="Age"
+                value={countries[0].id}    
               >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                {countries.map((country) => {
+                  return <MenuItem key={country.id} value={country.id}>{country.name}</MenuItem>
+                })}
               </Select>
             </FormControl>
           </Stack>
@@ -255,9 +294,7 @@ const Checkout = () => {
           </Typography>
         </Stack> */}
       </Box>
-      <Box sx={{ width: "50%", backgroundColor: "#F7F3EE"}}>
-        UserDetails
-      </Box>
+      <Box sx={{ width: "50%", backgroundColor: "#F7F3EE" }}>UserDetails</Box>
     </Box>
   );
 };

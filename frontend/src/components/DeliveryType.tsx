@@ -22,7 +22,7 @@ import {
     );
   };
 
-const RadioInput = () => {
+const DeliveryType = () => {
   return (
     <>
       <RadioGroup
@@ -60,4 +60,4 @@ const RadioInput = () => {
   );
 };
 
-export default RadioInput;
+export default DeliveryType;

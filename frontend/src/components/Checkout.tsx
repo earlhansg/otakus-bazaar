@@ -15,20 +15,14 @@ import Btc from "../images/checkout/btc.png";
 import InputContainer from "./InputContainer";
 import DeliveryType from "./DeliveryType";
 import { Divider } from "@mui/material";
-import { FormProvider, useForm, UseFormSetValue } from "react-hook-form";
-import {DevTool} from '@hookform/devtools'
-import { useEffect } from "react";
+import { FormProvider, useForm, Controller } from "react-hook-form";
+import { DevTool } from "@hookform/devtools";
+import { countries, formValues } from "./utils/formValues";
 
-const countries = [
-  {
-    id: 1,
-    name: "Philippines",
-  },
-];
 
 const Checkout = () => {
-  const methods = useForm({ defaultValues: { email: "batman" } })
-  const { register, control, setValue } = methods;
+  const methods = useForm({ defaultValues: formValues });
+  const { control } = methods;
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -108,12 +102,12 @@ const Checkout = () => {
                     id: "email",
                     label: "Email",
                     placeholder: "Email",
-                    variant: "outlined"
+                    variant: "outlined",
                   }}
                 />
               </Stack>
 
-              {/* <Stack ml={0}>
+              <Stack ml={0}>
                 <FormControlLabel
                   control={<Checkbox />}
                   label={
@@ -128,7 +122,7 @@ const Checkout = () => {
                 <Typography component="h4" mb={1} sx={{ fontSize: "16px" }}>
                   Delivery method
                 </Typography>
-                <DeliveryType />
+                <DeliveryType control={control} />
               </Stack>
 
               <Stack mt={2} mb={1}>
@@ -139,11 +133,12 @@ const Checkout = () => {
                   <InputLabel id="demo-simple-select-label">
                     Counrty/Region
                   </InputLabel>
-                  <Select
+                  <Controller name="country" control={control} render={({field}) => (
+                    <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={countries[0].id}
-                  >
+                    value={field.value}
+                    >
                     {countries.map((country) => {
                       return (
                         <MenuItem key={country.id} value={country.id}>
@@ -152,6 +147,7 @@ const Checkout = () => {
                       );
                     })}
                   </Select>
+                  )}/> 
                 </FormControl>
               </Stack>
 
@@ -165,11 +161,10 @@ const Checkout = () => {
                   type="textfield"
                   multiple={true}
                   values={{
-                    iName: "firstname",
-                    iLabel: "firstname",
-                    iId: "firstname",
-                    id: "outlined-basic",
+                    name: "firstname",
+                    id: "firstname",
                     label: "Firstname",
+                    placeholder: "firstname",
                     variant: "outlined",
                     sx: { width: "49%" },
                   }}
@@ -178,11 +173,10 @@ const Checkout = () => {
                   type="textfield"
                   multiple={true}
                   values={{
-                    iName: "lastname",
-                    iLabel: "lastname",
-                    iId: "lastname",
-                    id: "outlined-basic",
+                    name: "lastname",
+                    id: "lastname",
                     label: "Lastname",
+                    placeholder: "Lastname",
                     variant: "outlined",
                     sx: { width: "49%" },
                   }}
@@ -195,11 +189,10 @@ const Checkout = () => {
                 type="textfield"
                 multiple={false}
                 values={{
-                  iName: "company",
-                  iLabel: "company",
-                  iId: "company",
-                  id: "outlined-basic",
+                  name: "company",
+                  id: "company",
                   label: "Company (optional)",
+                  placeholder: "Company (optional)",
                   variant: "outlined",
                 }}
               />
@@ -210,11 +203,10 @@ const Checkout = () => {
                 type="textfield"
                 multiple={false}
                 values={{
-                  iName: "address",
-                  iLabel: "address",
-                  iId: "address",
-                  id: "outlined-basic",
+                  name: "address",
+                  id: "address",
                   label: "Address",
+                  placeholder: "Address",
                   variant: "outlined",
                 }}
               />
@@ -225,11 +217,10 @@ const Checkout = () => {
                 type="textfield"
                 multiple={false}
                 values={{
-                  iName: "apartment",
-                  iLabel: "apartment",
-                  iId: "apartment",
-                  id: "outlined-basic",
+                  name: "apartment",
+                  id: "apartment",
                   label: "Apartment, suite, etc. (optional)",
+                  placeholder: "Apartment, suite, etc. (optional)",
                   variant: "outlined",
                 }}
               />
@@ -244,11 +235,10 @@ const Checkout = () => {
                   type="textfield"
                   multiple={true}
                   values={{
-                    iName: "city",
-                    iLabel: "city",
-                    iId: "city",
-                    id: "outlined-basic",
+                    name: "city",
+                    id: "city",
                     label: "City",
+                    placeholder: "City",
                     variant: "outlined",
                     sx: { width: "32%" },
                   }}
@@ -257,11 +247,10 @@ const Checkout = () => {
                   type="textfield"
                   multiple={true}
                   values={{
-                    iName: "state",
-                    iLabel: "state",
-                    iId: "state",
-                    id: "outlined-basic",
+                    name: "state",
+                    id: "state",
                     label: "State",
+                    placeholder: "State",
                     variant: "outlined",
                     sx: { width: "32%" },
                   }}
@@ -270,11 +259,10 @@ const Checkout = () => {
                   type="textfield"
                   multiple={true}
                   values={{
-                    iName: "zipcode",
-                    iLabel: "zipcode",
-                    iId: "zipcode",
-                    id: "outlined-basic",
+                    name: "zipcode",
+                    id: "zipcode",
                     label: "Zip Code",
+                    placeholder: "Zip Code",
                     variant: "outlined",
                     sx: { width: "32%" },
                   }}
@@ -286,14 +274,13 @@ const Checkout = () => {
                 type="textfield"
                 multiple={false}
                 values={{
-                  iName: "phone",
-                  iLabel: "phone",
-                  iId: "phone",
-                  id: "outlined-basic",
+                  name: "phone",
+                  id: "phone",
                   label: "Phone",
+                  placeholder: "Phone",
                   variant: "outlined",
                 }}
-              /> */}
+              />
               <Button
                 variant="contained"
                 sx={{ mt: 3, borderRadius: "0px", p: 2, width: "100%" }}
@@ -310,7 +297,7 @@ const Checkout = () => {
         </Stack> */}
       </Box>
       <Box sx={{ width: "50%", backgroundColor: "#F7F3EE" }}>UserDetails</Box>
-      <DevTool control={control}/>
+      <DevTool control={control} />
     </Box>
   );
 };

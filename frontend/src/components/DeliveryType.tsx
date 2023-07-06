@@ -24,6 +24,7 @@ const DeliveryType = ({ control }: { control: Control<FormValues> }) => {
       <Controller
         control={control}
         name="deliveryType"
+        rules={{required: true}}
         render={({ field }) => (
           <RadioGroup {...field}>
             <FormControlLabel

@@ -34,3 +34,4 @@ export const formValues = {
   country: countries[0].id,
   deliveryType: "pickup",
 };
+

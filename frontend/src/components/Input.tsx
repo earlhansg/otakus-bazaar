@@ -1,14 +1,13 @@
 import { TextFieldProps, TextField } from "@mui/material";
-import { validations } from "./utils/inputValidations";
 import { useFormContext } from "react-hook-form";
 
 export type InputProps = {
   name: string;
   label: string;
+  validation?: object;
 } & TextFieldProps;
 
-const Input = ({ name, label, ...textFieldProps }: InputProps) => {
-  const inputValidation = validations.find((list) => list.name === name);
+const Input = ({ name, label, validation, ...textFieldProps }: InputProps) => {
   const {
     register,
     formState: { errors },
@@ -16,7 +15,7 @@ const Input = ({ name, label, ...textFieldProps }: InputProps) => {
 
   return (
     <>
-      <TextField {...textFieldProps} {...register(name, inputValidation?.validation)}/>
+      <TextField {...textFieldProps} {...register(name, validation)}/>
     </>
   );
 };

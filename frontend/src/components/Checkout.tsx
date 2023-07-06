@@ -18,11 +18,18 @@ import { Divider } from "@mui/material";
 import { FormProvider, useForm, Controller } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import { countries, formValues } from "./utils/formValues";
+import { addressValidation, cityValidation, emailValidation, firstnameValidation, lastnameValidation, phoneValidation, stateValidation, zipcodeValidation } from "./utils/inputValidations";
 
 
 const Checkout = () => {
   const methods = useForm({ defaultValues: formValues });
   const { control } = methods;
+
+  const onSubmit = methods.handleSubmit(data => {
+    console.log(data)
+    methods.reset()
+    // setSuccess(true)
+  })
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -103,6 +110,7 @@ const Checkout = () => {
                     label: "Email",
                     placeholder: "Email",
                     variant: "outlined",
+                    ...emailValidation
                   }}
                 />
               </Stack>
@@ -133,7 +141,7 @@ const Checkout = () => {
                   <InputLabel id="demo-simple-select-label">
                     Counrty/Region
                   </InputLabel>
-                  <Controller name="country" control={control} render={({field}) => (
+                  <Controller name="country" control={control} rules={{ required: true }} render={({field}) => (
                     <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
@@ -164,9 +172,10 @@ const Checkout = () => {
                     name: "firstname",
                     id: "firstname",
                     label: "Firstname",
-                    placeholder: "firstname",
+                    placeholder: "Firstname",
                     variant: "outlined",
                     sx: { width: "49%" },
+                    ...firstnameValidation
                   }}
                 />
                 <InputContainer
@@ -179,6 +188,7 @@ const Checkout = () => {
                     placeholder: "Lastname",
                     variant: "outlined",
                     sx: { width: "49%" },
+                    ...lastnameValidation
                   }}
                 />
               </Stack>
@@ -208,6 +218,7 @@ const Checkout = () => {
                   label: "Address",
                   placeholder: "Address",
                   variant: "outlined",
+                  ...addressValidation
                 }}
               />
 
@@ -241,6 +252,7 @@ const Checkout = () => {
                     placeholder: "City",
                     variant: "outlined",
                     sx: { width: "32%" },
+                    ...cityValidation
                   }}
                 />
                 <InputContainer
@@ -253,6 +265,7 @@ const Checkout = () => {
                     placeholder: "State",
                     variant: "outlined",
                     sx: { width: "32%" },
+                    ...stateValidation
                   }}
                 />
                 <InputContainer
@@ -265,6 +278,7 @@ const Checkout = () => {
                     placeholder: "Zip Code",
                     variant: "outlined",
                     sx: { width: "32%" },
+                    ...zipcodeValidation
                   }}
                 />
               </Stack>
@@ -279,9 +293,11 @@ const Checkout = () => {
                   label: "Phone",
                   placeholder: "Phone",
                   variant: "outlined",
+                  ...phoneValidation
                 }}
               />
               <Button
+                onClick={onSubmit}
                 variant="contained"
                 sx={{ mt: 3, borderRadius: "0px", p: 2, width: "100%" }}
               >

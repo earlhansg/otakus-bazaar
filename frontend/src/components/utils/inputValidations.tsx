@@ -18,7 +18,7 @@ export const validations: ValidtionProp[] = [
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Email is required",
       },
       maxLength: {
         value: 10,
@@ -32,7 +32,7 @@ export const emailValidation = {
   validation: {
     required: {
       value: true,
-      message: "required",
+      message: "Email is required",
     },
   },
 };
@@ -41,7 +41,7 @@ export const deliveryTypeValidation = {
   validation: {
     required: {
       value: true,
-      message: "required",
+      message: "Delivery Type is required",
     },
   },
 };
@@ -50,7 +50,7 @@ export const firstnameValidation = {
   validation: {
     required: {
       value: true,
-      message: "required",
+      message: "Firstname is required",
     },
   },
 }
@@ -59,7 +59,7 @@ export const lastnameValidation = {
   validation: {
     required: {
       value: true,
-      message: "required",
+      message: "Lastname is required",
     },
   },
 }
@@ -68,7 +68,7 @@ export const addressValidation = {
   validation: {
     required: {
       value: true,
-      message: "required",
+      message: "Address is required",
     },
   },
 }
@@ -77,7 +77,7 @@ export const cityValidation = {
   validation: {
     required: {
       value: true,
-      message: "required",
+      message: "City is required",
     },
   },
 }
@@ -86,7 +86,7 @@ export const stateValidation = {
   validation: {
     required: {
       value: true,
-      message: "required",
+      message: "State is required",
     },
   },
 }
@@ -95,7 +95,7 @@ export const zipcodeValidation = {
   validation: {
     required: {
       value: true,
-      message: "required",
+      message: "Zipcode is required",
     },
   },
 }
@@ -104,7 +104,7 @@ export const phoneValidation = {
   validation: {
     required: {
       value: true,
-      message: "required",
+      message: "Phone is required",
     },
     pattern: {
       value: /^(?:\+?63|0)[\s.-]?\d{1,4}[\s.-]?\d{1,4}[\s.-]?\d{1,4}$/,

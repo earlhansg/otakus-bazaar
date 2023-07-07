@@ -21,7 +21,7 @@ const InputContainer = ({
           <Input {...values} />
         </Stack>
       )}
-      {multiple && <Input {...values} />}
+      {multiple && <Input multiple {...values} />}
     </>
   );
 };

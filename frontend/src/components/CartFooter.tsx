@@ -3,11 +3,19 @@ import Divider from "@mui/material/Divider";
 import { Stack, Typography, Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
+import { useNavigate } from 'react-router-dom';
 
 const CartFooter = () => {
   let total = 0;
   const cartItemList = useSelector((state: RootState) => state.cart.itemsList);
   cartItemList.map(({ totalPrice }) => (total += totalPrice));
+  const navigate = useNavigate();
+
+
+  const addToCart = () => {
+    navigate('/checkout');
+  }
+
   return (
     <Box sx={{ backgroundColor: "#f7f3ee" }}>
       <Stack>
@@ -84,7 +92,7 @@ const CartFooter = () => {
               ${total.toLocaleString()}
             </Typography>
           </Stack>
-          <Button variant="contained" sx={{ mt: 3, borderRadius: "0px", p: 2 }}>
+          <Button variant="contained" sx={{ mt: 3, borderRadius: "0px", p: 2 }} onClick={addToCart}>
             Add to Cart
           </Button>
         </Stack>

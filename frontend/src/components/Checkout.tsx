@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Badge,
   Box,
   Checkbox,
   FormControl,
@@ -7,6 +8,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  TextField,
 } from "@mui/material";
 import { Stack, Typography, Button } from "@mui/material";
 import Paypal from "../images/checkout/paypal.png";
@@ -18,18 +20,34 @@ import { Divider } from "@mui/material";
 import { FormProvider, useForm, Controller } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import { countries, formValues } from "./utils/formValues";
-import { addressValidation, cityValidation, emailValidation, firstnameValidation, lastnameValidation, phoneValidation, stateValidation, zipcodeValidation } from "./utils/inputValidations";
-
+import {
+  addressValidation,
+  cityValidation,
+  emailValidation,
+  firstnameValidation,
+  lastnameValidation,
+  phoneValidation,
+  stateValidation,
+  zipcodeValidation,
+} from "./utils/inputValidations";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store";
+import { findProductImage } from "./utils/findProductImage";
 
 const Checkout = () => {
   const methods = useForm({ defaultValues: formValues });
   const { control } = methods;
 
-  const onSubmit = methods.handleSubmit(data => {
-    console.log(data)
-    methods.reset()
+  const cartItemList = useSelector((state: RootState) => state.cart.itemsList);
+  const dispatch = useDispatch();
+  let total = 0;
+  cartItemList.map(({ totalPrice }) => (total += totalPrice));
+
+  const onSubmit = methods.handleSubmit((data) => {
+    console.log(data);
+    methods.reset();
     // setSuccess(true)
-  })
+  });
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -110,7 +128,7 @@ const Checkout = () => {
                     label: "Email",
                     placeholder: "Email",
                     variant: "outlined",
-                    ...emailValidation
+                    ...emailValidation,
                   }}
                 />
               </Stack>
@@ -141,21 +159,26 @@ const Checkout = () => {
                   <InputLabel id="demo-simple-select-label">
                     Counrty/Region
                   </InputLabel>
-                  <Controller name="country" control={control} rules={{ required: true }} render={({field}) => (
-                    <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={field.value}
-                    >
-                    {countries.map((country) => {
-                      return (
-                        <MenuItem key={country.id} value={country.id}>
-                          {country.name}
-                        </MenuItem>
-                      );
-                    })}
-                  </Select>
-                  )}/> 
+                  <Controller
+                    name="country"
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field }) => (
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={field.value}
+                      >
+                        {countries.map((country) => {
+                          return (
+                            <MenuItem key={country.id} value={country.id}>
+                              {country.name}
+                            </MenuItem>
+                          );
+                        })}
+                      </Select>
+                    )}
+                  />
                 </FormControl>
               </Stack>
 
@@ -175,7 +198,7 @@ const Checkout = () => {
                     placeholder: "Firstname",
                     variant: "outlined",
                     sx: { width: "49%" },
-                    ...firstnameValidation
+                    ...firstnameValidation,
                   }}
                 />
                 <InputContainer
@@ -188,7 +211,7 @@ const Checkout = () => {
                     placeholder: "Lastname",
                     variant: "outlined",
                     sx: { width: "49%" },
-                    ...lastnameValidation
+                    ...lastnameValidation,
                   }}
                 />
               </Stack>
@@ -218,7 +241,7 @@ const Checkout = () => {
                   label: "Address",
                   placeholder: "Address",
                   variant: "outlined",
-                  ...addressValidation
+                  ...addressValidation,
                 }}
               />
 
@@ -252,7 +275,7 @@ const Checkout = () => {
                     placeholder: "City",
                     variant: "outlined",
                     sx: { width: "32%" },
-                    ...cityValidation
+                    ...cityValidation,
                   }}
                 />
                 <InputContainer
@@ -265,7 +288,7 @@ const Checkout = () => {
                     placeholder: "State",
                     variant: "outlined",
                     sx: { width: "32%" },
-                    ...stateValidation
+                    ...stateValidation,
                   }}
                 />
                 <InputContainer
@@ -278,7 +301,7 @@ const Checkout = () => {
                     placeholder: "Zip Code",
                     variant: "outlined",
                     sx: { width: "32%" },
-                    ...zipcodeValidation
+                    ...zipcodeValidation,
                   }}
                 />
               </Stack>
@@ -293,7 +316,7 @@ const Checkout = () => {
                   label: "Phone",
                   placeholder: "Phone",
                   variant: "outlined",
-                  ...phoneValidation
+                  ...phoneValidation,
                 }}
               />
               <Button
@@ -306,13 +329,126 @@ const Checkout = () => {
             </form>
           </FormProvider>
         </Stack>
-        {/* <Stack>
-          <Typography sx={{}} component="h4">
-            Otaku
-          </Typography>
-        </Stack> */}
       </Box>
-      <Box sx={{ width: "50%", backgroundColor: "#F7F3EE" }}>UserDetails</Box>
+      <Box sx={{ width: "50%", backgroundColor: "#F7F3EE" }} mt={5}>
+        <Stack sx={{ width: "50%" }} mt={2} ml={5}>
+          {cartItemList.map((item) => (
+            <Stack flexDirection={"row"} mt={2}>
+              <Stack justifyContent={"center"}>
+                <Badge badgeContent={item.quantity} color="primary">
+                  <img
+                    src={findProductImage(item.imagePath)}
+                    alt={item.name}
+                    width="100px"
+                    height="100px"
+                    style={{ borderRadius: "10px" }}
+                  />
+                </Badge>
+              </Stack>
+              <Stack sx={{ m: "1rem" }} m={2}>
+                <Typography
+                  variant="h6"
+                  component="h6"
+                  sx={{ fontSize: "14px", fontWeight: 400 }}
+                >
+                  {item.name}
+                </Typography>
+              </Stack>
+              <Stack sx={{ width: "55%" }} mr={1} justifyContent={"center"}>
+                <Typography
+                  variant="h6"
+                  component="p"
+                  sx={{
+                    fontSize: "15px",
+                    fontWeight: 400,
+                    alignSelf: "end",
+                  }}
+                >
+                  ${item.totalPrice.toLocaleString()}
+                </Typography>
+              </Stack>
+            </Stack>
+          ))}
+        </Stack>
+        <Stack
+          flexDirection={"row"}
+          sx={{ width: "50%", gap: "10px" }}
+          mt={2}
+          ml={5}
+        >
+          <TextField
+            sx={{ flexGrow: 1, backgroundColor:"white" }}
+            label="Discount Code"
+            variant="outlined"
+          />
+          <Button variant="contained">Apply</Button>
+        </Stack>
+        <Stack sx={{ width: "50%", gap: "5px" }} mt={3} ml={5}>
+          <Stack flexDirection={"row"}>
+            <Typography
+              variant="h6"
+              sx={{
+                fontSize: "15px",
+                fontWeight: 400,
+                flexGrow: 1
+              }}
+            >
+              Subtotal
+            </Typography>
+            <Typography
+              variant="h6"
+              sx={{
+                fontSize: "15px",
+                fontWeight: 400
+              }}
+            >
+              ${total.toLocaleString()}
+            </Typography>
+          </Stack>
+          <Stack flexDirection={"row"}>
+            <Typography
+              variant="h6"
+              sx={{
+                fontSize: "15px",
+                fontWeight: 400,
+                flexGrow: 1
+              }}
+            >
+              Shipping
+            </Typography>
+            <Typography
+              variant="h6"
+              sx={{
+                fontSize: "13px",
+                fontWeight: 400
+              }}
+            >
+              $90
+            </Typography>
+          </Stack>
+          <Stack flexDirection={"row"}>
+            <Typography
+              variant="h6"
+              sx={{
+                fontSize: "17px",
+                fontWeight: 400,
+                flexGrow: 1
+              }}
+            >
+              Total
+            </Typography>
+            <Typography
+              variant="h6"
+              sx={{
+                fontSize: "17px",
+                fontWeight: 400
+              }}
+            >
+              ${Number(total + 90).toLocaleString()}
+            </Typography>
+          </Stack>
+        </Stack>
+      </Box>
       <DevTool control={control} />
     </Box>
   );

@@ -50,10 +50,9 @@ const Checkout = () => {
   });
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display:"flex", flexDirection: {md: "row", xs: "column"} }}>
       <Box
-        m={5}
-        sx={{ width: "50%", display: "flex", justifyContent: "flex-end" }}
+        sx={{ width: {md:"50%", xs:"100%"}, display: "flex", justifyContent: {md:"flex-end", xs:"center"}, margin: {md: 5, xs: 0}}}
       >
         <Stack m={2} sx={{ width: "60%" }}>
           <Typography
@@ -330,8 +329,8 @@ const Checkout = () => {
           </FormProvider>
         </Stack>
       </Box>
-      <Box sx={{ width: "50%", backgroundColor: "#F7F3EE" }} mt={5}>
-        <Stack sx={{ width: "50%" }} mt={2} ml={5}>
+      <Box sx={{ width: "50%", backgroundColor: "#F7F3EE" }}>
+        <Stack sx={{ width: "50%" }} mt={5} ml={5}>
           {cartItemList.map((item) => (
             <Stack flexDirection={"row"} mt={2}>
               <Stack justifyContent={"center"}>

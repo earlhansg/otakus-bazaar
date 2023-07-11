@@ -50,9 +50,14 @@ const Checkout = () => {
   });
 
   return (
-    <Box sx={{ display:"flex", flexDirection: {md: "row", xs: "column"} }}>
+    <Box sx={{ display: "flex", flexDirection: { md: "row", xs: "column" } }}>
       <Box
-        sx={{ width: {md:"50%", xs:"100%"}, display: "flex", justifyContent: {md:"flex-end", xs:"center"}, margin: {md: 5, xs: 0}}}
+        sx={{
+          width: { md: "50%", xs: "100%" },
+          display: "flex",
+          justifyContent: { md: "flex-end", xs: "center" },
+          margin: { md: 5, xs: 0 },
+        }}
       >
         <Stack m={2} sx={{ width: "60%" }}>
           <Typography
@@ -329,8 +334,17 @@ const Checkout = () => {
           </FormProvider>
         </Stack>
       </Box>
-      <Box sx={{ width: "50%", backgroundColor: "#F7F3EE" }}>
-        <Stack sx={{ width: "50%" }} mt={5} ml={5}>
+      <Box
+        sx={{
+          width: { md: "50%", xs: "100%" },
+          backgroundColor: "#F7F3EE",
+          display: "flex",
+          flexDirection: { xs: "column" },
+          justifyContent: { md: "start" },
+          alignItems: { md: "start", xs: "center" },
+        }}
+      >
+        <Stack sx={{ width: { md: "50%", xs: "100%" } }} mt={5} ml={5}>
           {cartItemList.map((item) => (
             <Stack flexDirection={"row"} mt={2}>
               <Stack justifyContent={"center"}>
@@ -376,7 +390,7 @@ const Checkout = () => {
           ml={5}
         >
           <TextField
-            sx={{ flexGrow: 1, backgroundColor:"white" }}
+            sx={{ flexGrow: 1, backgroundColor: "white" }}
             label="Discount Code"
             variant="outlined"
           />
@@ -389,7 +403,7 @@ const Checkout = () => {
               sx={{
                 fontSize: "15px",
                 fontWeight: 400,
-                flexGrow: 1
+                flexGrow: 1,
               }}
             >
               Subtotal
@@ -398,7 +412,7 @@ const Checkout = () => {
               variant="h6"
               sx={{
                 fontSize: "15px",
-                fontWeight: 400
+                fontWeight: 400,
               }}
             >
               ${total.toLocaleString()}
@@ -410,7 +424,7 @@ const Checkout = () => {
               sx={{
                 fontSize: "15px",
                 fontWeight: 400,
-                flexGrow: 1
+                flexGrow: 1,
               }}
             >
               Shipping
@@ -419,7 +433,7 @@ const Checkout = () => {
               variant="h6"
               sx={{
                 fontSize: "13px",
-                fontWeight: 400
+                fontWeight: 400,
               }}
             >
               $90
@@ -431,7 +445,7 @@ const Checkout = () => {
               sx={{
                 fontSize: "17px",
                 fontWeight: 400,
-                flexGrow: 1
+                flexGrow: 1,
               }}
             >
               Total
@@ -440,7 +454,7 @@ const Checkout = () => {
               variant="h6"
               sx={{
                 fontSize: "17px",
-                fontWeight: 400
+                fontWeight: 400,
               }}
             >
               ${Number(total + 90).toLocaleString()}

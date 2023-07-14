@@ -4,4 +4,4 @@ This is a straightforward e-commerce web application that enables users to purch
 
 ### Sample UI
 
-<img src="https://github.com/earlhansg/otakus-bazaar/blob/main/frontend/src/images/loom.gif" style=" width:150% ; height:120% ">
+<img src="https://github.com/earlhansg/otakus-bazaar/blob/main/frontend/src/images/loom.gif" style=" width:500px ; height:300px ">
